@@ -506,16 +506,9 @@ class HubotJenkinsPlugin extends HubotMessenger
         jobName = folderPath[folderPath.length-1]
         folderPath.splice(folderPath.length-1, 1)
 
-        if (folderPath.length == 1)
-          # when we only receive the folder name
-          job = @_getJobByFolderName(folderPath[0], jobName)
-          if (!job)
-            @send "There are no folders with the name #{folderPath[0]} that have a job called #{jobName}."
-        else
-          # when we receive the absolute path to the job
-          job = @_getJobByAbsolutePath(folderPath, jobName)
-          if (!job)
-            @send "There are no folders with the path #{folderPath.join('/')} that have a job called #{jobName}."
+        job = @_getJobByAbsolutePath(folderPath, jobName)
+        if (!job)
+          @send "There are no folders with the path #{folderPath.join('/')} that have a job called #{jobName}."
       else
         # when we receive no folder information at all and only the job name
         job = @_getJobByName(@msg.match[1].trim())
