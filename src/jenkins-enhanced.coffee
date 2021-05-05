@@ -635,7 +635,7 @@ class HubotJenkinsPlugin extends HubotMessenger
       @reply "It appears an error occurred while contacting your Jenkins instance.  The error I received was #{err.code} from #{server.url}.  Please verify that your Jenkins instance is configured properly."
     else if 200 <= res.statusCode < 400 # Or, not an error code.
       job = @_getJob(false)
-      @reply "(#{res.statusCode}) Build started for #{job.name} #{server.url}/#{job.path}"
+      @reply "(#{res.statusCode}) Build started for #{job.name} #{server.url}#{job.path}"
     else if 400 == res.statusCode
       @build true
     else
